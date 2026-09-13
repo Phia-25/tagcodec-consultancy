@@ -1,0 +1,1 @@
+const toggle=document.querySelector(".menu-toggle");const nav=document.querySelector("#nav-menu");toggle.addEventListener("click",()=>{nav.style.display=nav.style.display==="flex"?"none":"flex"});document.querySelectorAll("nav a").forEach(a=>a.addEventListener("click",()=>{if(window.innerWidth<=850)nav.style.display="none"}));
