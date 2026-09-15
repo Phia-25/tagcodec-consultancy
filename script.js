@@ -1,62 +1,47 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-  // =========================
-  // MOBILE MENU
-  // =========================
 
-  const toggle = document.querySelector(".menu-toggle");
-  const nav = document.querySelector("#nav-menu");
+  /* =========================
+     MOBILE MENU
+     ========================= */
 
-  if (toggle && nav) {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navMenu = document.querySelector("#nav-menu");
 
-    toggle.addEventListener("click", () => {
-      nav.style.display =
-        nav.style.display === "flex" ? "none" : "flex";
-    });
+  if (menuToggle && navMenu) {
 
-    document.querySelectorAll("nav a").forEach(a => {
+    menuToggle.addEventListener("click", function () {
 
-      a.addEventListener("click", () => {
+      if (navMenu.style.display === "flex") {
 
-        if (window.innerWidth <= 850) {
-          nav.style.display = "none";
-        }
+        navMenu.style.display = "none";
 
-      });
+      } else {
+
+        navMenu.style.display = "flex";
+
+      }
 
     });
 
   }
 
 
-  // =========================
-  // ACTIVITY POSTS
-  // =========================
 
-  document.querySelectorAll(".activity-post").forEach(post => {
+  /* =========================
+     LIKE BUTTON
+     ========================= */
+
+  document.querySelectorAll(".activity-post").forEach(function (post) {
 
     const likeButton = post.querySelector(".like-button");
     const likeCount = post.querySelector(".like-count");
 
-    const commentButton = post.querySelector(".comment-button");
-    const commentArea = post.querySelector(".comment-area");
-
-    const commentInput = post.querySelector(".comment-input");
-    const commentSubmit = post.querySelector(".comment-submit");
-    const commentsList = post.querySelector(".comments-list");
-
-    const shareButton = post.querySelector(".share-button");
-
-
-    // =========================
-    // LIKE
-    // =========================
-
     let likes = 0;
 
-    if (likeButton && likeCount) {
+    if (likeButton) {
 
-      likeButton.addEventListener("click", () => {
+      likeButton.addEventListener("click", function () {
 
         if (likeButton.classList.contains("liked")) {
 
@@ -64,8 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           likeButton.classList.remove("liked");
 
-          likeButton.innerHTML =
-            "♡ <span>Like</span>";
+          likeButton.innerHTML = "♡ <span>Like</span>";
 
         } else {
 
@@ -73,8 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           likeButton.classList.add("liked");
 
-          likeButton.innerHTML =
-            "♥ <span>Liked</span>";
+          likeButton.innerHTML = "♥ <span>Liked</span>";
 
         }
 
@@ -86,313 +69,142 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // =========================
-    // COMMENT
-    // =========================
+
+    /* =========================
+       COMMENT BUTTON
+       ========================= */
+
+    const commentButton =
+      post.querySelector(".comment-button");
+
+    const commentArea =
+      post.querySelector(".comment-area");
 
     if (commentButton && commentArea) {
 
-      commentButton.addEventListener("click", () => {
+      commentButton.addEventListener("click", function () {
 
         commentArea.classList.toggle("show");
-
-        if (
-          commentArea.classList.contains("show") &&
-          commentInput
-        ) {
-          commentInput.focus();
-        }
 
       });
 
     }
 
 
-    // =========================
-    // ADD COMMENT
-    // =========================
 
-    function addComment() {
+    /* =========================
+       POST COMMENT
+       ========================= */
 
-      if (!commentInput || !commentsList) {
-        return;
-      }
+    const commentInput =
+      post.querySelector(".comment-input");
 
-      const text = commentInput.value.trim();
+    const commentSubmit =
+      post.querySelector(".comment-submit");
 
-      if (text === "") {
-        return;
-      }
+    const commentsList =
+      post.querySelector(".comments-list");
 
-      const comment = document.createElement("div");
+    const commentCount =
+      post.querySelector(".comment-count");
 
-      comment.className = "comment";
-
-      const name = document.createElement("strong");
-      name.textContent = "Visitor";
-
-      const message = document.createElement("p");
-      message.textContent = text;
-
-      comment.appendChild(name);
-      comment.appendChild(message);
-
-      commentsList.appendChild(comment);
-
-      commentInput.value = "";
-
-
-      const commentsCount =
-        post.querySelector(
-          ".activity-stats span:nth-child(2)"
-        );
-
-      const totalComments =
-        commentsList.children.length;
-
-      if (commentsCount) {
-
-        commentsCount.textContent =
-          totalComments +
-          (totalComments === 1
-            ? " Comment"
-            : " Comments");
-
-      }
-
-    }
-
+    let comments = 0;
 
     if (commentSubmit) {
 
-      commentSubmit.addEventListener(
-        "click",
-        addComment
-      );
+      commentSubmit.addEventListener("click", function () {
 
-    }
+        const text = commentInput.value.trim();
 
-
-    if (commentInput) {
-
-      commentInput.addEventListener(
-        "keypress",
-        (event) => {
-
-          if (event.key === "Enter") {
-            addComment();
-          }
-
+        if (text === "") {
+          return;
         }
-      );
+
+        const comment =
+          document.createElement("div");
+
+        comment.className = "comment-item";
+
+        comment.textContent = text;
+
+        commentsList.appendChild(comment);
+
+        commentInput.value = "";
+
+        comments++;
+
+        commentCount.textContent =
+          comments +
+          (comments === 1
+            ? " Comment"
+            : " Comments");
+
+      });
 
     }
 
 
-    // =========================
-    // SHARE
-    // =========================
+
+    /* =========================
+       SHARE BUTTON
+       ========================= */
+
+    const shareButton =
+      post.querySelector(".share-button");
 
     if (shareButton) {
 
-      shareButton.addEventListener(
-        "click",
-        async () => {
+      shareButton.addEventListener("click", async function () {
 
-          const shareData = {
+        const shareData = {
 
-            title:
-              "TAGCODEC Consultancy Department",
+          title:
+            "TAGCODEC Consultancy Department",
 
-            text:
-              "Check out this activity from TAGCODEC Consultancy Department.",
+          text:
+            "Check out the latest activity of the TAGCODEC Consultancy Department.",
 
-            url:
+          url:
+            window.location.href
+
+        };
+
+
+        if (navigator.share) {
+
+          try {
+
+            await navigator.share(shareData);
+
+          } catch (error) {
+
+            console.log("Share cancelled.");
+
+          }
+
+        } else {
+
+          try {
+
+            await navigator.clipboard.writeText(
               window.location.href
+            );
 
-          };
+            alert(
+              "Activity link copied! You can now paste it on Facebook or other platforms."
+            );
 
+          } catch (error) {
 
-          // Mobile / supported browsers
-          if (navigator.share) {
+            alert(
+              "Copy the page URL from your browser to share this activity."
+            );
 
-            try {
-
-              await navigator.share(
-                shareData
-              );
-
-            } catch (error) {
-
-              console.log(
-                "Share cancelled."
-              );
-
-            }
-
-            return;
           }
-
-
-          // Desktop fallback
-          const oldMenu =
-            post.querySelector(".share-menu");
-
-          if (oldMenu) {
-            oldMenu.remove();
-            return;
-          }
-
-
-          const shareMenu =
-            document.createElement("div");
-
-          shareMenu.className =
-            "share-menu";
-
-
-          const title =
-            document.createElement("div");
-
-          title.className =
-            "share-title";
-
-          title.textContent =
-            "Share this activity";
-
-          shareMenu.appendChild(title);
-
-
-          // Facebook
-          const facebook =
-            document.createElement("button");
-
-          facebook.textContent =
-            "Facebook";
-
-          facebook.onclick = () => {
-
-            const url =
-              encodeURIComponent(
-                window.location.href
-              );
-
-            window.open(
-              "https://www.facebook.com/sharer/sharer.php?u=" +
-              url,
-              "_blank"
-            );
-
-          };
-
-          shareMenu.appendChild(facebook);
-
-
-          // X
-          const x =
-            document.createElement("button");
-
-          x.textContent = "X";
-
-          x.onclick = () => {
-
-            const url =
-              encodeURIComponent(
-                window.location.href
-              );
-
-            const text =
-              encodeURIComponent(
-                "Check out this activity from TAGCODEC Consultancy Department."
-              );
-
-            window.open(
-              "https://twitter.com/intent/tweet?text=" +
-              text +
-              "&url=" +
-              url,
-              "_blank"
-            );
-
-          };
-
-          shareMenu.appendChild(x);
-
-
-          // WhatsApp
-          const whatsapp =
-            document.createElement("button");
-
-          whatsapp.textContent =
-            "WhatsApp";
-
-          whatsapp.onclick = () => {
-
-            const text =
-              encodeURIComponent(
-                "Check out this activity from TAGCODEC Consultancy Department: " +
-                window.location.href
-              );
-
-            window.open(
-              "https://wa.me/?text=" +
-              text,
-              "_blank"
-            );
-
-          };
-
-          shareMenu.appendChild(whatsapp);
-
-
-          // Copy Link
-          const copy =
-            document.createElement("button");
-
-          copy.textContent =
-            "Copy Link";
-
-          copy.onclick = async () => {
-
-            try {
-
-              await navigator.clipboard.writeText(
-                window.location.href
-              );
-
-              alert("Link copied!");
-
-            } catch (error) {
-
-              alert(
-                "Unable to copy the link."
-              );
-
-            }
-
-          };
-
-          shareMenu.appendChild(copy);
-
-
-          // Cancel
-          const cancel =
-            document.createElement("button");
-
-          cancel.textContent =
-            "Cancel";
-
-          cancel.onclick = () => {
-            shareMenu.remove();
-          };
-
-          shareMenu.appendChild(cancel);
-
-
-          post.appendChild(shareMenu);
 
         }
-      );
+
+      });
 
     }
 
