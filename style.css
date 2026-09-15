@@ -259,3 +259,303 @@
   }
 
 }
+/* =========================
+   ACTIVITIES PAGE
+   ========================= */
+
+.activity-page-header {
+  background: linear-gradient(135deg, #064b31, #0a6c47);
+  color: white;
+  padding: 75px 0;
+  text-align: center;
+}
+
+.activity-page-header .container {
+  max-width: 850px;
+}
+
+.activity-page-header h1 {
+  margin: 8px 0 15px;
+}
+
+.activity-page-header p:not(.eyebrow) {
+  max-width: 700px;
+  margin: auto;
+  color: #edf7f1;
+  font-size: 1.05rem;
+}
+
+
+/* ACTIVITIES FEED */
+
+.activities-feed-section {
+  background: #f5f7f3;
+}
+
+.activity-feed {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.activity-post {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 20px #173d2b18;
+  border: 1px solid #e1e8e2;
+}
+
+.activity-header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 18px 20px;
+}
+
+.activity-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #d6ad43;
+  background: white;
+  flex-shrink: 0;
+}
+
+.activity-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.activity-header h3 {
+  margin: 0;
+  color: #075b3b;
+  font-size: 1rem;
+}
+
+.activity-header p {
+  margin: 2px 0 0;
+  color: #777;
+  font-size: .8rem;
+}
+
+.activity-caption {
+  padding: 0 20px 18px;
+}
+
+.activity-caption p {
+  margin: 0;
+  color: #263c31;
+}
+
+.activity-photo {
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  background: #eef4ed;
+}
+
+.activity-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.empty-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #075b3b;
+  font-weight: 800;
+  border-top: 1px solid #e1e8e2;
+  border-bottom: 1px solid #e1e8e2;
+}
+
+.activity-stats {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+  color: #777;
+  font-size: .85rem;
+}
+
+.activity-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #e1e8e2;
+  border-bottom: 1px solid #e1e8e2;
+}
+
+.activity-actions button {
+  border: 0;
+  background: white;
+  padding: 13px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #555;
+  font-size: .9rem;
+}
+
+.activity-actions button:hover {
+  background: #f3f7f0;
+  color: #075b3b;
+}
+
+.activity-actions .liked {
+  color: #075b3b;
+  background: #eef4ed;
+}
+
+.comment-area {
+  display: none;
+  padding: 15px 20px 20px;
+  background: #fafbf9;
+}
+
+.comment-area.show {
+  display: block;
+}
+
+.comment-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.comment-input {
+  flex: 1;
+  border: 1px solid #ccd8cf;
+  border-radius: 20px;
+  padding: 10px 15px;
+  outline: none;
+}
+
+.comment-input:focus {
+  border-color: #075b3b;
+}
+
+.comment-submit {
+  border: 0;
+  border-radius: 20px;
+  padding: 9px 16px;
+  background: #075b3b;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.comments-list {
+  margin-top: 15px;
+}
+
+.comment-item {
+  background: #eef4ed;
+  border-radius: 8px;
+  padding: 10px 13px;
+  margin-top: 8px;
+  color: #263c31;
+  font-size: .9rem;
+}
+
+
+/* HOME ACTIVITY PREVIEW */
+
+.activities-preview {
+  background: #f5f7f3;
+}
+
+.preview-activity {
+  max-width: 720px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px #173d2b18;
+  border: 1px solid #e1e8e2;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 18px 20px;
+}
+
+.preview-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #d6ad43;
+  background: white;
+  flex-shrink: 0;
+}
+
+.preview-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.preview-header h3 {
+  margin: 0;
+  color: #075b3b;
+  font-size: 1rem;
+}
+
+.preview-header p {
+  margin: 2px 0 0;
+  color: #777;
+  font-size: .8rem;
+}
+
+.preview-photo {
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+  background: #eef4ed;
+}
+
+.preview-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-content {
+  padding: 20px;
+}
+
+.preview-content p {
+  margin: 0 0 18px;
+  color: #263c31;
+}
+
+
+/* ACTIVE NAV */
+
+nav a.active {
+  color: #e4bd55;
+}
+
+
+@media(max-width:600px) {
+
+  .activity-page-header {
+    padding: 55px 0;
+  }
+
+  .activity-photo {
+    height: 300px;
+  }
+
+  .preview-photo {
+    height: 280px;
+  }
+
+}
