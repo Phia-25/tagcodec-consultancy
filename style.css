@@ -259,14 +259,14 @@
   }
 
 }
-/* =========================
+/* =========================================
    ACTIVITIES PAGE
-   ========================= */
+   ========================================= */
 
 .activity-page-header {
   background: linear-gradient(135deg, #064b31, #0a6c47);
   color: white;
-  padding: 75px 0;
+  padding: 85px 0;
   text-align: center;
 }
 
@@ -286,14 +286,16 @@
 }
 
 
-/* ACTIVITIES FEED */
+/* =========================================
+   ACTIVITY FEED
+   ========================================= */
 
 .activities-feed-section {
   background: #f5f7f3;
 }
 
 .activity-feed {
-  max-width: 720px;
+  width: min(720px, 100%);
   margin: 0 auto;
 }
 
@@ -302,9 +304,12 @@
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 30px;
-  box-shadow: 0 5px 20px #173d2b18;
   border: 1px solid #e1e8e2;
+  box-shadow: 0 6px 25px #173d2b18;
 }
+
+
+/* HEADER */
 
 .activity-header {
   display: flex;
@@ -314,8 +319,8 @@
 }
 
 .activity-avatar {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid #d6ad43;
@@ -342,6 +347,9 @@
   font-size: .8rem;
 }
 
+
+/* CAPTION */
+
 .activity-caption {
   padding: 0 20px 18px;
 }
@@ -350,6 +358,9 @@
   margin: 0;
   color: #263c31;
 }
+
+
+/* PHOTO */
 
 .activity-photo {
   width: 100%;
@@ -371,9 +382,11 @@
   justify-content: center;
   color: #075b3b;
   font-weight: 800;
-  border-top: 1px solid #e1e8e2;
-  border-bottom: 1px solid #e1e8e2;
+  font-size: 1rem;
 }
+
+
+/* STATS */
 
 .activity-stats {
   display: flex;
@@ -382,6 +395,9 @@
   color: #777;
   font-size: .85rem;
 }
+
+
+/* BUTTONS */
 
 .activity-actions {
   display: grid;
@@ -410,6 +426,9 @@
   background: #eef4ed;
 }
 
+
+/* COMMENTS */
+
 .comment-area {
   display: none;
   padding: 15px 20px 20px;
@@ -431,6 +450,7 @@
   border-radius: 20px;
   padding: 10px 15px;
   outline: none;
+  font-family: inherit;
 }
 
 .comment-input:focus {
@@ -440,11 +460,15 @@
 .comment-submit {
   border: 0;
   border-radius: 20px;
-  padding: 9px 16px;
+  padding: 9px 17px;
   background: #075b3b;
   color: white;
   font-weight: 700;
   cursor: pointer;
+}
+
+.comment-submit:hover {
+  background: #064b31;
 }
 
 .comments-list {
@@ -461,20 +485,22 @@
 }
 
 
-/* HOME ACTIVITY PREVIEW */
+/* =========================================
+   HOME ACTIVITIES PREVIEW
+   ========================================= */
 
 .activities-preview {
   background: #f5f7f3;
 }
 
 .preview-activity {
-  max-width: 720px;
+  width: min(720px, 100%);
   margin: 0 auto;
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 5px 20px #173d2b18;
   border: 1px solid #e1e8e2;
+  box-shadow: 0 6px 25px #173d2b18;
 }
 
 .preview-header {
@@ -485,8 +511,8 @@
 }
 
 .preview-avatar {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid #d6ad43;
@@ -532,7 +558,7 @@
 }
 
 .preview-content p {
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   color: #263c31;
 }
 
@@ -544,10 +570,14 @@ nav a.active {
 }
 
 
+/* =========================================
+   MOBILE
+   ========================================= */
+
 @media(max-width:600px) {
 
   .activity-page-header {
-    padding: 55px 0;
+    padding: 60px 0;
   }
 
   .activity-photo {
@@ -556,6 +586,22 @@ nav a.active {
 
   .preview-photo {
     height: 280px;
+  }
+
+  .activity-header {
+    padding: 15px;
+  }
+
+  .activity-caption {
+    padding: 0 15px 15px;
+  }
+
+  .activity-stats {
+    padding: 10px 15px;
+  }
+
+  .comment-area {
+    padding: 15px;
   }
 
 }
