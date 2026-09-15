@@ -1,242 +1,401 @@
-const toggle = document.querySelector(".menu-toggle");
-const nav = document.querySelector("#nav-menu");
+document.addEventListener("DOMContentLoaded", () => {
 
-toggle.addEventListener("click", () => {
-  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
-});
+  // =========================
+  // MOBILE MENU
+  // =========================
 
-document.querySelectorAll("nav a").forEach(a => {
-  a.addEventListener("click", () => {
-    if (window.innerWidth <= 850) {
-      nav.style.display = "none";
-    }
-  });
-});
+  const toggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector("#nav-menu");
 
+  if (toggle && nav) {
 
-// LIKE BUTTON
-document.querySelectorAll(".activity-post").forEach(post => {
+    toggle.addEventListener("click", () => {
+      nav.style.display =
+        nav.style.display === "flex" ? "none" : "flex";
+    });
 
-  const likeButton = post.querySelector(".like-button");
-  const likeCount = post.querySelector(".like-count");
+    document.querySelectorAll("nav a").forEach(a => {
 
-  let likes = 0;
+      a.addEventListener("click", () => {
 
-  likeButton.addEventListener("click", () => {
+        if (window.innerWidth <= 850) {
+          nav.style.display = "none";
+        }
 
-    if (likeButton.classList.contains("liked")) {
+      });
 
-      likes--;
-      likeButton.classList.remove("liked");
-      likeButton.innerHTML = "♡ <span>Like</span>";
-
-    } else {
-
-      likes++;
-      likeButton.classList.add("liked");
-      likeButton.innerHTML = "♥ <span>Liked</span>";
-
-    }
-
-    likeCount.textContent = likes + (likes === 1 ? " Like" : " Likes");
-
-  });
-
-
-  // COMMENT BUTTON
-  const commentButton = post.querySelector(".comment-button");
-  const commentArea = post.querySelector(".comment-area");
-
-  commentButton.addEventListener("click", () => {
-
-    commentArea.classList.toggle("show");
-
-    if (commentArea.classList.contains("show")) {
-      post.querySelector(".comment-input").focus();
-    }
-
-  });
-
-
-  // COMMENT SUBMIT
-  const commentInput = post.querySelector(".comment-input");
-  const commentSubmit = post.querySelector(".comment-submit");
-  const commentsList = post.querySelector(".comments-list");
-
-  commentSubmit.addEventListener("click", addComment);
-
-  commentInput.addEventListener("keypress", (event) => {
-
-    if (event.key === "Enter") {
-      addComment();
-    }
-
-  });
-
-
-  function addComment() {
-
-    const text = commentInput.value.trim();
-
-    if (text === "") {
-      return;
-    }
-
-    const comment = document.createElement("div");
-
-    comment.className = "comment";
-
-    comment.innerHTML = `
-      <strong>Visitor</strong>
-      <p>${text}</p>
-    `;
-
-    commentsList.appendChild(comment);
-
-    commentInput.value = "";
-
-    const commentsCount = post.querySelector(".activity-stats span:nth-child(2)");
-
-    const totalComments = commentsList.children.length;
-
-    commentsCount.textContent =
-      totalComments + (totalComments === 1 ? " Comment" : " Comments");
+    });
 
   }
 
 
-  // SHARE BUTTON
-  const shareButton = post.querySelector(".share-button");
+  // =========================
+  // ACTIVITY POSTS
+  // =========================
 
-  shareButton.addEventListener("click", async () => {
+  document.querySelectorAll(".activity-post").forEach(post => {
 
-    const shareData = {
-      title: "TAGCODEC Consultancy Department",
-      text: "Check out this activity from TAGCODEC Consultancy Department.",
-      url: window.location.href
-    };
+    const likeButton = post.querySelector(".like-button");
+    const likeCount = post.querySelector(".like-count");
+
+    const commentButton = post.querySelector(".comment-button");
+    const commentArea = post.querySelector(".comment-area");
+
+    const commentInput = post.querySelector(".comment-input");
+    const commentSubmit = post.querySelector(".comment-submit");
+    const commentsList = post.querySelector(".comments-list");
+
+    const shareButton = post.querySelector(".share-button");
 
 
-    if (navigator.share) {
+    // =========================
+    // LIKE
+    // =========================
 
-      try {
-        await navigator.share(shareData);
-      } catch (error) {
-        console.log("Share cancelled.");
+    let likes = 0;
+
+    if (likeButton && likeCount) {
+
+      likeButton.addEventListener("click", () => {
+
+        if (likeButton.classList.contains("liked")) {
+
+          likes--;
+
+          likeButton.classList.remove("liked");
+
+          likeButton.innerHTML =
+            "♡ <span>Like</span>";
+
+        } else {
+
+          likes++;
+
+          likeButton.classList.add("liked");
+
+          likeButton.innerHTML =
+            "♥ <span>Liked</span>";
+
+        }
+
+        likeCount.textContent =
+          likes + (likes === 1 ? " Like" : " Likes");
+
+      });
+
+    }
+
+
+    // =========================
+    // COMMENT
+    // =========================
+
+    if (commentButton && commentArea) {
+
+      commentButton.addEventListener("click", () => {
+
+        commentArea.classList.toggle("show");
+
+        if (
+          commentArea.classList.contains("show") &&
+          commentInput
+        ) {
+          commentInput.focus();
+        }
+
+      });
+
+    }
+
+
+    // =========================
+    // ADD COMMENT
+    // =========================
+
+    function addComment() {
+
+      if (!commentInput || !commentsList) {
+        return;
       }
 
-    } else {
+      const text = commentInput.value.trim();
 
-      const shareMenu = document.createElement("div");
+      if (text === "") {
+        return;
+      }
 
-      shareMenu.className = "share-menu";
+      const comment = document.createElement("div");
 
-      shareMenu.innerHTML = `
-        <div class="share-title">Share this activity</div>
+      comment.className = "comment";
 
-        <button onclick="shareFacebook()">Facebook</button>
+      const name = document.createElement("strong");
+      name.textContent = "Visitor";
 
-        <button onclick="shareMessenger()">Messenger</button>
+      const message = document.createElement("p");
+      message.textContent = text;
 
-        <button onclick="shareX()">X</button>
+      comment.appendChild(name);
+      comment.appendChild(message);
 
-        <button onclick="shareWhatsApp()">WhatsApp</button>
+      commentsList.appendChild(comment);
 
-        <button onclick="copyPageLink()">Copy Link</button>
+      commentInput.value = "";
 
-        <button onclick="closeShareMenu(this)">Cancel</button>
-      `;
 
-      shareButton.parentElement.parentElement.appendChild(shareMenu);
+      const commentsCount =
+        post.querySelector(
+          ".activity-stats span:nth-child(2)"
+        );
+
+      const totalComments =
+        commentsList.children.length;
+
+      if (commentsCount) {
+
+        commentsCount.textContent =
+          totalComments +
+          (totalComments === 1
+            ? " Comment"
+            : " Comments");
+
+      }
+
+    }
+
+
+    if (commentSubmit) {
+
+      commentSubmit.addEventListener(
+        "click",
+        addComment
+      );
+
+    }
+
+
+    if (commentInput) {
+
+      commentInput.addEventListener(
+        "keypress",
+        (event) => {
+
+          if (event.key === "Enter") {
+            addComment();
+          }
+
+        }
+      );
+
+    }
+
+
+    // =========================
+    // SHARE
+    // =========================
+
+    if (shareButton) {
+
+      shareButton.addEventListener(
+        "click",
+        async () => {
+
+          const shareData = {
+
+            title:
+              "TAGCODEC Consultancy Department",
+
+            text:
+              "Check out this activity from TAGCODEC Consultancy Department.",
+
+            url:
+              window.location.href
+
+          };
+
+
+          // Mobile / supported browsers
+          if (navigator.share) {
+
+            try {
+
+              await navigator.share(
+                shareData
+              );
+
+            } catch (error) {
+
+              console.log(
+                "Share cancelled."
+              );
+
+            }
+
+            return;
+          }
+
+
+          // Desktop fallback
+          const oldMenu =
+            post.querySelector(".share-menu");
+
+          if (oldMenu) {
+            oldMenu.remove();
+            return;
+          }
+
+
+          const shareMenu =
+            document.createElement("div");
+
+          shareMenu.className =
+            "share-menu";
+
+
+          const title =
+            document.createElement("div");
+
+          title.className =
+            "share-title";
+
+          title.textContent =
+            "Share this activity";
+
+          shareMenu.appendChild(title);
+
+
+          // Facebook
+          const facebook =
+            document.createElement("button");
+
+          facebook.textContent =
+            "Facebook";
+
+          facebook.onclick = () => {
+
+            const url =
+              encodeURIComponent(
+                window.location.href
+              );
+
+            window.open(
+              "https://www.facebook.com/sharer/sharer.php?u=" +
+              url,
+              "_blank"
+            );
+
+          };
+
+          shareMenu.appendChild(facebook);
+
+
+          // X
+          const x =
+            document.createElement("button");
+
+          x.textContent = "X";
+
+          x.onclick = () => {
+
+            const url =
+              encodeURIComponent(
+                window.location.href
+              );
+
+            const text =
+              encodeURIComponent(
+                "Check out this activity from TAGCODEC Consultancy Department."
+              );
+
+            window.open(
+              "https://twitter.com/intent/tweet?text=" +
+              text +
+              "&url=" +
+              url,
+              "_blank"
+            );
+
+          };
+
+          shareMenu.appendChild(x);
+
+
+          // WhatsApp
+          const whatsapp =
+            document.createElement("button");
+
+          whatsapp.textContent =
+            "WhatsApp";
+
+          whatsapp.onclick = () => {
+
+            const text =
+              encodeURIComponent(
+                "Check out this activity from TAGCODEC Consultancy Department: " +
+                window.location.href
+              );
+
+            window.open(
+              "https://wa.me/?text=" +
+              text,
+              "_blank"
+            );
+
+          };
+
+          shareMenu.appendChild(whatsapp);
+
+
+          // Copy Link
+          const copy =
+            document.createElement("button");
+
+          copy.textContent =
+            "Copy Link";
+
+          copy.onclick = async () => {
+
+            try {
+
+              await navigator.clipboard.writeText(
+                window.location.href
+              );
+
+              alert("Link copied!");
+
+            } catch (error) {
+
+              alert(
+                "Unable to copy the link."
+              );
+
+            }
+
+          };
+
+          shareMenu.appendChild(copy);
+
+
+          // Cancel
+          const cancel =
+            document.createElement("button");
+
+          cancel.textContent =
+            "Cancel";
+
+          cancel.onclick = () => {
+            shareMenu.remove();
+          };
+
+          shareMenu.appendChild(cancel);
+
+
+          post.appendChild(shareMenu);
+
+        }
+      );
 
     }
 
   });
 
 });
-
-
-// FACEBOOK
-function shareFacebook() {
-
-  const url = encodeURIComponent(window.location.href);
-
-  window.open(
-    "https://www.facebook.com/sharer/sharer.php?u=" + url,
-    "_blank"
-  );
-
-}
-
-
-// MESSENGER
-function shareMessenger() {
-
-  const url = encodeURIComponent(window.location.href);
-
-  window.open(
-    "https://www.facebook.com/dialog/send?link=" +
-    url +
-    "&app_id=123456789",
-    "_blank"
-  );
-
-}
-
-
-// X
-function shareX() {
-
-  const url = encodeURIComponent(window.location.href);
-
-  const text = encodeURIComponent(
-    "Check out this activity from TAGCODEC Consultancy Department."
-  );
-
-  window.open(
-    "https://twitter.com/intent/tweet?text=" +
-    text +
-    "&url=" +
-    url,
-    "_blank"
-  );
-
-}
-
-
-// WHATSAPP
-function shareWhatsApp() {
-
-  const url = encodeURIComponent(
-    "Check out this activity from TAGCODEC Consultancy Department: " +
-    window.location.href
-  );
-
-  window.open(
-    "https://wa.me/?text=" + url,
-    "_blank"
-  );
-
-}
-
-
-// COPY LINK
-function copyPageLink() {
-
-  navigator.clipboard.writeText(window.location.href);
-
-  alert("Link copied!");
-
-}
-
-
-// CLOSE SHARE MENU
-function closeShareMenu(button) {
-
-  const menu = button.closest(".share-menu");
-
-  if (menu) {
-    menu.remove();
-  }
-
-}
